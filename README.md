@@ -67,7 +67,7 @@ npm run dev  # launches on http://localhost:5173
 Set `VITE_API_BASE_URL=http://localhost:8000` in `frontend/.env` if needed.
 
 ## CLI Usage
-
+t
 ```bash
 python -m iac_audit.cli scan ./tests/samples --output json
 python -m iac_audit.cli scan ./tests/samples --output md --min-severity HIGH
