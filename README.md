@@ -34,8 +34,15 @@ Language: Python 3.11 (container), JavaScript/JSX
 
 ## Quick Start (Docker Compose)
 
+**Note:** If you encounter "No such container" errors on Windows, use the workaround script below.
+
 ```bash
+# Standard method (may have issues on Windows)
 docker compose up --build
+
+# Workaround for Windows (recommended if above fails)
+.\start-containers.ps1
+
 # Backend: http://localhost:8000
 # Frontend: http://localhost:5173
 ```
@@ -143,6 +150,7 @@ Tests live in `tests/` and cover both secure and insecure sample IaC demonstrati
 | No findings shown in UI (previous bug) | Toast promise misuse returned numeric toast ID instead of JSON | Fixed `FileUpload` to await original scan promise |
 | Empty SARIF | Upload contained only secure resources | Confirm with a known insecure sample (e.g. `pod-root.yaml`) |
 | CORS warnings | Backend not running / wrong port | Ensure backend at `http://localhost:8000` (docker compose or manual) |
+| `docker compose up` shows "No such container" error | Docker Desktop daemon state corruption on Windows | **Solution 1:** Restart Docker Desktop, then try `docker compose up --build` again<br>**Solution 2:** Use the workaround script: `.\start-containers.ps1` (bypasses Docker Compose) |
 
 ## Directory Overview
 
