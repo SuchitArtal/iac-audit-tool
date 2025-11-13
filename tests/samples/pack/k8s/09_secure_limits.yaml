@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pack-secure-limits
+spec:
+  containers:
+    - name: app
+      image: nginx
+      securityContext:
+        runAsUser: 1000
+        readOnlyRootFilesystem: true
+      resources:
+        limits:
+          cpu: "300m"
+          memory: "128Mi"

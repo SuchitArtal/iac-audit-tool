@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath-pod
+spec:
+  containers:
+    - name: app
+      image: busybox
+      command: ["sleep", "3600"]
+  volumes:
+    - name: hostpath-vol
+      hostPath:
+        path: /etc
+        type: Directory
+  restartPolicy: Never

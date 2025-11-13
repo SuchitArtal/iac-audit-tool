@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pack-hostpath
+spec:
+  containers:
+    - name: app
+      image: busybox
+      command: ["sleep","3600"]
+  volumes:
+    - name: hp
+      hostPath:
+        path: /var/lib
+        type: Directory

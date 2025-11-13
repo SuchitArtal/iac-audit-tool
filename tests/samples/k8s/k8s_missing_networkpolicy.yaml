@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: isolated-app
+spec:
+  containers:
+    - name: app
+      image: nginx:latest
+# Intentionally no NetworkPolicy manifest present in test pack to trigger global rule

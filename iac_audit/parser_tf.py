@@ -7,6 +7,8 @@ def parse_terraform_file(path: Path) -> List[Dict[str, Any]]:
 	"""
 	Return normalized resources:
 	{ type, name, body, file }
+	Supports hcl2 load shapes where resource block values may be a list of dicts
+	or a dict mapping name -> body.
 	"""
 	with open(path, "r", encoding="utf-8") as f:
 		try:
@@ -16,15 +18,25 @@ def parse_terraform_file(path: Path) -> List[Dict[str, Any]]:
 
 	results: List[Dict[str, Any]] = []
 	for block in data.get("resource", []):
-		# block is like {'aws_security_group': [{'web_sg': {...}}]}
-		for rtype, rlist in block.items():
-			for item in rlist:
-				if isinstance(item, dict):
-					for name, body in item.items():
-						results.append({
-							"type": rtype,
-							"name": name,
-							"body": body,
-							"file": str(path),
-						})
+		for rtype, rval in block.items():
+			# Case A: list of dicts: [{'name': {...}}, ...]
+			if isinstance(rval, list):
+				for item in rval:
+					if isinstance(item, dict):
+						for name, body in item.items():
+							results.append({
+								"type": rtype,
+								"name": name,
+								"body": body,
+								"file": str(path),
+							})
+			# Case B: dict mapping name -> body
+			elif isinstance(rval, dict):
+				for name, body in rval.items():
+					results.append({
+						"type": rtype,
+						"name": name,
+						"body": body,
+						"file": str(path),
+					})
 	return results

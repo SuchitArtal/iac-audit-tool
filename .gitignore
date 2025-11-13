@@ -1,0 +1,18 @@
+# Node modules
+frontend/node_modules/
+node_modules/
+
+# Python virtualenvs
+.venv/
+backend/.venv/
+
+# Build / distribution
+frontend/dist/
+build/
+
+# Environment
+.env
+
+# Editor / OS
+.DS_Store
+Thumbs.db

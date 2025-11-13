@@ -1,3 +1,5 @@
 python-hcl2
 PyYAML
 rich
+pytest
+pydantic>=2.0.0
